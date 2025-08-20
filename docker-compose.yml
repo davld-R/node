@@ -1,0 +1,15 @@
+services:
+  app:
+    build: .
+    # Comando para mantener el contenedor corriendo en segundo plano
+    command: tail -f /dev/null
+    ports:
+      # Mapea el puerto 3000 del host al 3000 del contenedor.
+      # Puedes cambiar el primer valor (ej: "8080:3000") si el puerto 3000 ya está en uso.
+      - "3000:3000"
+    volumes:
+      # Mapea la carpeta local './projects' a '/usr/src/app/projects' en el contenedor.
+      # ¡Aquí es donde debes colocar tus proyectos!
+      - ./projects:/usr/src/app/projects
+    # Directorio de trabajo por defecto al entrar al contenedor
+    working_dir: /usr/src/app
