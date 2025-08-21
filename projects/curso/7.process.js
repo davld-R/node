@@ -7,10 +7,10 @@
 // podemos controlar eventos del proceso
 process.on('exit', () => {
   // Ejemplo limpiar recursos
-});
+})
 
 // recuperar el directorio en el que esta trabajando
-console.log(process.cwd());
+console.log(process.cwd())
 
 // plarform
-console.log(process.env.PRUEBA);
+console.log(process.env.PRUEBA)

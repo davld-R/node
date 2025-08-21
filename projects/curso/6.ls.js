@@ -1,12 +1,12 @@
-const fs = require('node:fs');
+const fs = require('node:fs')
 
 fs.readdir('.', (err, files) => {
   if (err) {
-    console.log('Error en el directorio');
-    return;
+    console.log('Error en el directorio')
+    return
   }
 
   files.forEach((file) => {
-    console.log(file);
-  });
-});
+    console.log(file)
+  })
+})
