@@ -1,10 +1,21 @@
+# services:
+#   app:
+#     build: .
+#     # Comando para mantener el contenedor corriendo en segundo plano
+#     command: tail -f /dev/null
+#     ports:
+#       - '3000:3000'
+#     volumes:
+#       - ./projects:/usr/src/app/projects
+#     working_dir: /usr/src/app
+
 services:
   app:
     build: .
-    # Comando para mantener el contenedor corriendo en segundo plano
     command: tail -f /dev/null
     ports:
       - '3000:3000'
     volumes:
       - ./projects:/usr/src/app/projects
+      - /app/node_modules
     working_dir: /usr/src/app
