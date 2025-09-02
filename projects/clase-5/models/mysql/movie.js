@@ -3,7 +3,7 @@ import mysql from 'mysql2/promise'
 const DEFAULT_CONFIG = {
   host: 'node-db-1',
   user: 'david',
-  port: 3306,
+  port: 3306, // 3307
   password: 'contraseña',
   database: 'movies-database'
 }
