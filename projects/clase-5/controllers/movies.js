@@ -54,6 +54,10 @@ export class MovieController {
 
     const updatedMovie = await this.movieModel.update({ id, input: result.data })
 
+    if (!updatedMovie) {
+      return res.status(404).json({ message: 'Movie not found' })
+    }
+
     return res.json(updatedMovie)
   }
 }

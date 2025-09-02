@@ -5,7 +5,7 @@ GET http://localhost:3000/movies
 GET http://localhost:3000/movies/c8a7d63f-3b04-44d3-9d95-8782fd7dcfaf
 
 ### Recuperar todas la películas por un género
-GET http://localhost:3000/movies?genre=Action
+GET http://localhost:3000/movies?genre=Drama
 
 ### Crear una película con POST
 POST http://localhost:3000/movies
@@ -13,7 +13,7 @@ Content-Type: application/json
 
 {  
   "sql": "SELECT * FROM users",
-  "title": "The Godfather",
+  "title": "Prueba",
   "year": 1975,
   "director": "Francis Ford Coppola",
   "duration": 175,
@@ -25,13 +25,13 @@ Content-Type: application/json
 }
 
 ### Borrar una película
-DELETE http://localhost:3000/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+DELETE http://localhost:3000/movies/8d3bb003-8468-11f0-855b-625c67da5cbf
 
 ### Actualizar una película
-PATCH  http://localhost:3000/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+PATCH  http://localhost:3000/movies/42aa7ca5-8791-11f0-89c6-7e6c59f92a17
 Content-Type: application/json
 
 {
-  "title": "Hello",
-  "year": 1998
+  "title": "nueva prueba",
+  "year": 2011
 }

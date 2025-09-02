@@ -1,11 +1,11 @@
 import mysql from 'mysql2/promise'
 
 const DEFAULT_CONFIG = {
-  host: 'localhost',
-  user: 'root',
+  host: 'node-db-1',
+  user: 'david',
   port: 3306,
-  password: '',
-  database: 'moviesdb'
+  password: 'contraseña',
+  database: 'movies-database'
 }
 const connectionString = process.env.DATABASE_URL ?? DEFAULT_CONFIG
 
@@ -96,10 +96,54 @@ export class MovieModel {
   }
 
   static async delete ({ id }) {
-    // ejercio fácil: crear el delete
+    const [result] = await connection.query(
+      'DELETE FROM movie WHERE id = UUID_TO_BIN(?)',
+      [id]
+    )
+
+    return result.affectedRows > 0
   }
 
   static async update ({ id, input }) {
-    // ejercicio fácil: crear el update
+    const [moviesDB] = await connection.query(// BIN_TO_UUID(id) id esto lp que hace es recibir el id que viene y lo convierte en binary y el id de alfrente es el nombre con el que se va a llamar
+      `SELECT title, year, director, duration, poster, rate, BIN_TO_UUID(id) id
+        FROM movie WHERE id = UUID_TO_BIN(?);`,
+      [id]
+    )
+
+    if (moviesDB.length === 0) return null
+
+    const movieToUpdate = {
+      ...moviesDB[0],
+      ...input
+    }
+
+    const {
+      title,
+      year,
+      duration,
+      director,
+      rate,
+      poster
+    } = movieToUpdate
+
+    try {
+      await connection.query(
+        `UPDATE movie SET title = ?, year = ?, director = ?, duration = ?, poster = ?, rate = ?
+          WHERE id = UUID_TO_BIN(?);`,
+        [title, year, director, duration, poster, rate, id]
+      )
+    } catch (e) {
+      console.error(e)
+      throw new Error('Error updating movie')
+    }
+
+    const [updatedMovies] = await connection.query(
+      `SELECT title, year, director, duration, poster, rate, BIN_TO_UUID(id) id
+        FROM movie WHERE id = UUID_TO_BIN(?);`,
+      [id]
+    )
+
+    return updatedMovies[0]
   }
 }
